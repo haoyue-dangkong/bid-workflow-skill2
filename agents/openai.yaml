@@ -1,0 +1,7 @@
+interface:
+  display_name: "投标文件工作流"
+  short_description: "覆盖投标目录、资料清单、资料包、非技术标和技术标的全流程处理"
+  default_prompt: "使用 $bid-workflow-skill 处理当前投标项目，并先判断应调用哪个功能。"
+
+policy:
+  allow_implicit_invocation: true
