@@ -1,0 +1,178 @@
+# 投标文件工作流 Skill（第二版）
+
+这是一个面向招投标工作的可复用 AI Skill，用于把招标文件分析、投标目录生成、资料准备、非技术标编制和技术标优化组织成可审核的标准流程。
+
+第二版新增了“功能 6：根据所需资料清单整理项目资料包”，并加强了“功能 4：编制技术标书以外的内容”的资料核验、模板保真、逐份审核和原件保护规则。
+
+> 本 Skill 是投标编制辅助工具，不替代招标文件原文、企业内部审核、法律审核、报价决策、签字或盖章。任何无法从有效文件或用户确认中得到的信息，必须标记为“缺少数据”“待确认”或“冲突”，不得猜测或编造。
+
+## 主要功能
+
+| 编号 | 功能 | 主要输入 | 主要输出 |
+| --- | --- | --- | --- |
+| 1 | 提取投标文件目录 | 招标文件、附件、答疑、澄清或补遗 | Word 目录审核稿和 UTF-8 目录 TXT |
+| 2 | 根据目录生成文件夹和 DOCX | 功能 1 生成的目录 TXT | 经预览和审核后的文件夹及标题 DOCX |
+| 3 | 生成投标文件所需资料清单 | PDF/Word 招标文件及相关附件 | 分类、合并、可追溯的资料清单 |
+| 4 | 编制技术标书以外的内容 | 非技术标模板、招标依据、经确认的项目资料包 | 商务标、资信标等非技术标独立成品及审核报告 |
+| 5 | 优化技术标书 | 技术标 Word 文件和页数要求 | 格式化稿、逐篇优化稿和页数调整最终稿 |
+| 6 | 根据资料清单整理项目资料包 | 功能 3 的最终清单和企业资料文件夹 | 经预览、审核后复制的项目资料包及索引 |
+
+## 推荐工作流
+
+```text
+招标文件
+  ├─ 功能 1：提取投标目录
+  │      └─ 功能 2：生成文件夹和 DOCX
+  │
+  └─ 功能 3：生成资料清单
+         └─ 功能 6：整理项目资料包
+                └─ 功能 4：编制非技术标内容
+
+技术标 Word + 页数要求
+  └─ 功能 5：格式化 → 逐篇内容优化 → 总页数调整
+```
+
+六个功能可以单独调用。完成上游功能后，Skill 不会自动跳过审核并执行下一个功能。
+
+## 关键安全规则
+
+- 始终保留招标文件、企业资料和 Word 模板原件，只在独立输出目录中创建副本或成果。
+- 功能 2 必须先显示完整目录预览；用户明确回复“审核通过”后，才能创建文件夹和 DOCX。
+- 功能 6 必须先显示候选资料、匹配依据、风险和预计复制清单；审核通过后才能复制资料。
+- 功能 4 必须先提交资料扫描结果；审核通过后逐份编制，每完成一份再交用户审核。
+- 功能 5 按“统一格式—逐篇优化—页数调整”执行；当前文章未通过时不能进入下一篇。
+- 不编造企业名称、证书、人员、业绩、报价、日期、技术参数、签名、印章或二维码。
+- 来源发生冲突时分别列出，不擅自选择其中一个。
+- 不把真实招标文件、企业资料、个人信息或项目成果提交到本 Skill 仓库。
+
+## 在 Codex 中安装
+
+OpenAI 官方说明中，Skill 是包含 `SKILL.md`、可选 `scripts/` 和 `references/` 的目录；Codex 支持显式调用和根据描述自动匹配。参见 [OpenAI 官方 Skill 文档](https://developers.openai.com/codex/skills/)。
+
+### 方法一：使用 Skill Installer
+
+在 Codex 中调用 `$skill-installer`，要求它从本仓库安装 Skill：
+
+```text
+使用 $skill-installer 从 https://github.com/haoyue-dangkong/bid-workflow-skill2 安装这个 Skill。
+```
+
+本仓库为私有仓库时，当前环境必须已经登录有访问权限的 GitHub 账号。
+
+### 方法二：Windows PowerShell 手动安装
+
+个人 Skill 的官方目录为 `$HOME/.agents/skills`。首次安装可执行：
+
+```powershell
+New-Item -ItemType Directory -Force "$HOME\.agents\skills" | Out-Null
+git clone https://github.com/haoyue-dangkong/bid-workflow-skill2.git "$HOME\.agents\skills\bid-workflow-skill"
+```
+
+以后更新已有 Skill：
+
+```powershell
+Set-Location "$HOME\.agents\skills\bid-workflow-skill"
+git pull
+```
+
+Codex 通常会自动识别 Skill 的新增或修改；如果没有显示，再重启 Codex。
+
+## 调用示例
+
+本仓库名是 `bid-workflow-skill2`，但 Skill 内部名称是 `bid-workflow-skill`，因此显式调用时使用 `$bid-workflow-skill`。
+
+```text
+使用 $bid-workflow-skill 的功能 1，从这份招标文件中提取投标文件目录。
+```
+
+```text
+使用 $bid-workflow-skill 的功能 2，解析这个目录 TXT。先输出完整预览，不要创建文件；等我回复“审核通过”后再执行。
+```
+
+```text
+使用 $bid-workflow-skill 的功能 3，根据招标文件生成投标文件资料清单，并把同一个人的资料合并到一条。
+```
+
+```text
+使用 $bid-workflow-skill 的功能 6，根据最终资料清单扫描企业资料。先给我候选匹配和预计复制清单，不要立即复制。
+```
+
+```text
+使用 $bid-workflow-skill 的功能 4，扫描项目资料包并列出已确认、缺少数据、待确认和冲突；我审核通过后再编制非技术标。
+```
+
+```text
+使用 $bid-workflow-skill 的功能 5，先统一这些技术标 Word 的格式，再逐篇优化；每完成一篇都等我审核。
+```
+
+也可以直接描述任务。任务与 `SKILL.md` 中的适用范围匹配时，Codex 可以自动选择此 Skill；重要项目建议使用 `$bid-workflow-skill` 明确指定。
+
+## 功能 2 的辅助脚本
+
+仓库提供三条可选 Python 脚本，用于解析目录、创建结构和创建后核对：
+
+```powershell
+# 解析 TXT 并输出预览
+python scripts\parse_bid_tree.py 目录.txt
+
+# 只预览，不创建任何文件
+python scripts\create_bid_structure.py 目录.txt 输出目录
+
+# 仅在用户已对当前预览明确回复“审核通过”后使用
+python scripts\create_bid_structure.py 目录.txt 输出目录 --approved
+
+# 核对已经创建的文件夹、DOCX 和文档标题
+python scripts\check_bid_structure.py 目录.txt 输出目录
+```
+
+`--approved` 参数只是防止误操作的技术开关，不能代替用户在当前任务中的明确审核。
+
+## 运行环境
+
+基础规则可以在能够读取 Markdown Skill 的 AI 环境中使用。完整执行能力取决于目标环境是否具备：
+
+- 本地文件和文件夹读写权限；
+- PDF、DOC/DOCX、图片和 OCR 读取能力；
+- Word 文档创建、编辑和逐页渲染能力；
+- Python 3（仅辅助脚本需要）；
+- LibreOffice、Microsoft Word 或其他可用于 DOCX 转 PDF、渲染和页数核对的办公软件。
+
+如果目标 AI 只能读取文本而不能操作本地文件，仍可执行规则分析、目录预览和资料清单编制，但不能保证自动创建 DOCX、整理资料包或完成逐页版式检查。
+
+## 仓库结构
+
+```text
+bid-workflow-skill2/
+├─ SKILL.md
+├─ agents/
+│  └─ openai.yaml
+├─ references/
+│  ├─ 01-directory-extraction.md
+│  ├─ 02-directory-generation.md
+│  ├─ 03-materials-checklist.md
+│  ├─ 04-nontechnical-drafting.md
+│  ├─ 05-technical-optimization.md
+│  └─ 06-materials-packaging.md
+└─ scripts/
+   ├─ parse_bid_tree.py
+   ├─ create_bid_structure.py
+   └─ check_bid_structure.py
+```
+
+- `SKILL.md`：总入口、功能路由、共同原则和审核门。
+- `references/`：六个功能的详细规则、输入输出、异常处理和验收要求。
+- `scripts/`：功能 2 的可选确定性脚本。
+- `agents/openai.yaml`：Codex 中的显示名称、简介和调用策略。
+
+## 跨 AI 使用说明
+
+本项目把核心规则写在 Markdown 文件中，并把辅助脚本与规则分离，因此可以迁移到支持 Agent Skills、项目规则或智能体工作流的其他 AI 软件。
+
+迁移不等于“一键通用”：不同软件的 Skill 安装目录、文件权限、审批机制、Word/PDF 工具和脚本执行能力不同。迁移时应保留 `SKILL.md` 与 `references/` 的审核规则，并根据目标软件文档调整安装方式。
+
+## 第二版变化
+
+- 新增功能 6：根据最终资料清单扫描企业资料，建立对应关系，经审核后整理项目资料包。
+- 优化功能 4：加强模板全文读取、资料有效性核对、缺失/冲突标记、扫描件与签章保护、逐份渲染审核和原件保护。
+- 保留功能 2、4、5、6 的人工审核门，避免未经确认就批量写入或进入下一阶段。
+
