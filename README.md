@@ -172,6 +172,8 @@ AI智能编标系统面向需要亲自准备、编写和检查标书的投标专
 
 免费版安装的是本仓库中的 `bid-workflow-skill`。它与完整版工作文件夹的启动方式不同，**不包含 00 和 07**。
 
+Codex 和 WorkBuddy 共用同一个完整技能包和同一套功能规则，按所用客户端选择下面的安装方法。
+
 ### 方法一：让 Codex 安装
 
 在 Codex 中发送：
@@ -184,7 +186,7 @@ https://github.com/haoyue-dangkong/bid-workflow-skill2
 
 安装后确认 `bid-workflow-skill` 已被识别。如果没有显示，可以重启 Codex 后再次检查。
 
-### 方法二：Windows 手动安装
+### 方法二：Codex 的 Windows 手动安装
 
 已安装 Git 的用户，可以在 PowerShell 中执行以下命令。Git 是用于下载和管理代码仓库的工具；这组命令只用于首次安装到不存在的目标文件夹。
 
@@ -202,6 +204,15 @@ git pull
 
 Codex 的本地 Skill 目录、安装和识别方式见 [OpenAI 官方 Skill 文档](https://learn.chatgpt.com/docs/build-skills)。
 
+### 方法三：WorkBuddy 项目级手动安装
+
+1. 从 [Gitee](https://gitee.com/s13275466782/bid-workflow-skill2) 的“克隆/下载”，或 [GitHub](https://github.com/haoyue-dangkong/bid-workflow-skill2) 的“Code → Download ZIP”下载本仓库并解压。
+2. 找到直接包含 `SKILL.md` 的那层文件夹，将其命名为 `bid-workflow-skill`，完整保留其中的文件及子文件夹。
+3. 将完整技能文件夹放到当前项目工作目录下的 `.codebuddy/skills/` 中，确认入口位置为 `.codebuddy/skills/bid-workflow-skill/SKILL.md`，不要多套一层下载包目录。
+4. 在 WorkBuddy 中选择包含 `.codebuddy` 的那个工作目录，新建任务，确认已识别 `bid-workflow-skill` 后再使用。
+
+“项目级”表示在对应工作目录中使用。两种客户端的安装位置不同，但不需要改写功能规则。模拟资料和输出成果放在技能包之外。界面可能随版本变化，参见 [WorkBuddy 官方项目说明](https://www.codebuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Project)及[技能说明](https://www.codebuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market)。
+
 ---
 
 <a id="free-usage"></a>
@@ -210,7 +221,7 @@ Codex 的本地 Skill 目录、安装和识别方式见 [OpenAI 官方 Skill 文
 
 以下示例用于个人非商业学习与体验，可使用模拟资料测试。不得将免费试用版用于单位工作任务、本人经营活动或向客户提供服务，除非已另行取得授权。
 
-仓库名是 `bid-workflow-skill2`，内部 Skill 名称是 `bid-workflow-skill`。下面的 `$bid-workflow-skill` 用于明确指定这个 Skill；客户端也可以根据任务描述匹配已安装的 Skill。
+仓库名是 `bid-workflow-skill2`，内部 Skill 名称是 `bid-workflow-skill`。下面的 `$bid-workflow-skill` 是 Codex 中明确指定该 Skill 的写法。WorkBuddy 用户先确认当前工作目录已识别该技能，再将示例中的 `$bid-workflow-skill` 写为 `已安装的 bid-workflow-skill`，其余任务描述相同。两种客户端执行同一套规则。
 
 ### 提取投标文件目录
 
@@ -315,7 +326,7 @@ Copyright © 2026 YY（GitHub：`haoyue-dangkong`）。除明确许可及法律�
 
 本仓库免费试用版采用[《投标 Skill 个人非商业使用许可》](LICENSE.md)，仅供个人非商业学习、研究与功能体验。允许在该范围内下载、安装、运行、备份及进行必要修改，并让 AI 工具读取和执行规则。
 
-未经作者另行明确书面授权，不得用于单位内部工作、本人经营活动、收费代编标或其他商业用途；不得对外分发、转售、重新授权或打包出售规则、脚本、文档及其修改版，不得删除版权和许可声明。法律规定、GitHub 平台条款允许或作者另行授权的情形除外。
+未经作者另行明确书面授权，不得用于单位内部工作、本人经营活动、收费代编标或其他商业用途；不得对外分发、转售、重新授权或打包出售规则、脚本、文档及其修改版，不得删除版权和许可声明。法律规定、相应托管平台适用条款允许或作者另行授权的情形除外。
 
 本许可不把用户输入资料和生成成果一概归为作者所有，也不主张独占投标方法或功能思想。付费完整版不适用本免费许可，具体权限以另行提供的授权条款为准。单位使用、商业用途及其他授权需求，请见[购买与联系](#get-agent)。
 

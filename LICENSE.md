@@ -10,7 +10,7 @@ Copyright © 2026 YY（GitHub：`haoyue-dangkong`）。
 
 ## 一、适用内容与权利归属
 
-本许可适用于 GitHub 仓库 [haoyue-dangkong/bid-workflow-skill2](https://github.com/haoyue-dangkong/bid-workflow-skill2) 中，作者 YY 有权授权且未另行注明许可的免费版规则、脚本、说明文档及相关原创内容，以下统称“本工具”。
+本许可适用于作者在 [GitHub](https://github.com/haoyue-dangkong/bid-workflow-skill2) 和 [Gitee](https://gitee.com/s13275466782/bid-workflow-skill2) 官方仓库发布的内容中，作者 YY 有权授权且未另行注明许可的免费版规则、脚本、说明文档及相关原创内容，以下统称“本工具”。
 
 作者保留对上述原创内容依法享有的权利。本许可只授予下文明确列出的使用权限，不转让著作权，也不主张独占投标方法、功能思想或通用工作流程。
 
@@ -48,9 +48,11 @@ Copyright © 2026 YY（GitHub：`haoyue-dangkong`）。
 
 ## 五、法律、平台及另行授权的例外
 
-本许可不限制适用法律规定无需另行许可即可进行的行为，也不限制 GitHub 服务条款已允许的行为。
+本许可不限制适用法律规定无需另行许可即可进行的行为，也不限制相应托管平台适用条款已允许的行为。
 
 公开仓库可按 GitHub 服务条款及平台功能被查看或 fork（在 GitHub 内建立副本）。该平台权限的范围以 [GitHub 服务条款 D.5](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service#5-license-grant-to-other-users) 及其他适用条款为准，不因此取得超出平台条款和本许可的商业使用、站外分发或转售权限。
+
+Gitee 上的查看及其他平台内使用，按 [Gitee 使用条款](https://gitee.com/terms)、本许可及其他适用条款确定，不直接套用 GitHub 的平台权限，也不因仓库公开而取得本许可未授予的商业使用、站外分发或转售权限。
 
 作者另行明确书面授权的行为，按该授权载明的对象、用途、范围和期限执行。
 
